@@ -34,7 +34,7 @@ jobs:
       - uses: webbertakken/unity-test-runner@v1.3
         id: testRunner
         with:
-          projectPath: ${{ matrix.projectPath }}
+          # projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
       - uses: actions/upload-artifact@v1
         with:
