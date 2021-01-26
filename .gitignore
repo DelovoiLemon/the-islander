@@ -1,5 +1,3 @@
-Logs
-Temp
-Builds
-Library
-Assets/settings.json*
+*Logs/
+*Temp/
+*Library/
