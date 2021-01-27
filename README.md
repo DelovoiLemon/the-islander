@@ -1,4 +1,4 @@
-# The Islander ![Build](https://github.com/DelovoiLemon/the-islander/workflows/Actions%20%F0%9F%98%8E/badge.svg)
+# The Islander ![Build](https://github.com/DelovoiLemon/the-islander/workflows/Build/badge.svg)
 Survival game
 
 # git commands:
