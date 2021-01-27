@@ -90,93 +90,93 @@ jobs:
       - uses: webbertakken/unity-activate@v1.2
       - uses: webbertakken/unity-return-license@v1
 
-  testRunnerInEditMode:
-    name: Test in editmode 📝
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout repository (required to test local actions)
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
+# testRunnerInEditMode:
+#    name: Test in editmode 📝
+#    runs-on: ubuntu-latest
+#    steps:
+#      # Checkout repository (required to test local actions)
+#      - uses: actions/checkout@v2
+#        with:
+#          lfs: true
 
       # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: The-Islander/Library
-          key: Library-test-project-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-
-      # Configure test runner
-      - uses: webbertakken/unity-test-runner@v1.3
-        id: testRunner
-        with:
-          projectPath: The-Islander
-          testMode: editmode
-
-      # Upload artifact
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results (edit mode)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
-
-  testRunnerInPlayMode:
-    name: Test in playmode 📺
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout repository (required to test local actions)
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
-
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: The-Islander/Library
-          key: Library-test-project-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-
-      # Configure test runner
-      - uses: webbertakken/unity-test-runner@v1.3
-        id: testRunner
-        with:
-          projectPath: The-Islander
-          testMode: playmode
-
-      # Upload artifact
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results (play mode)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
-
-  testRunnerInAllModes:
-    name: Test all modes ✨
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout repository (required to test local actions)
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
-
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: Library
-          key: Library-test-project-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-
-      # Configure test runner
-      - uses: webbertakken/unity-test-runner@v1.3
-        id: testRunner
-        with:
-          projectPath: The-Islander
-          testMode: all
-
-      # Upload artifacts
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results (all modes)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
-
+#      - uses: actions/cache@v1.1.0
+#        with:
+#          path: The-Islander/Library
+#          key: Library-test-project-${{ matrix.targetPlatform }}
+#          restore-keys: |
+#            Library-
+#      # Configure test runner
+#      - uses: webbertakken/unity-test-runner@v1.3
+#        id: testRunner
+#        with:
+#          projectPath: The-Islander
+#          testMode: editmode
+#
+#     # Upload artifact
+#     - uses: actions/upload-artifact@v1
+#       with:
+#         name: Test results (edit mode)
+#         path: ${{ steps.testRunner.outputs.artifactsPath }}
+#
+# testRunnerInPlayMode:
+#    name: Test in playmode 📺
+#   runs-on: ubuntu-latest
+#   steps:
+#     # Checkout repository (required to test local actions)
+#     - uses: actions/checkout@v2
+#       with:
+#         lfs: true
+#
+#     # Cache
+#     - uses: actions/cache@v1.1.0
+#       with:
+#         path: The-Islander/Library
+#         key: Library-test-project-${{ matrix.targetPlatform }}
+#         restore-keys: |
+#           Library-
+#     # Configure test runner
+#     - uses: webbertakken/unity-test-runner@v1.3
+#       id: testRunner
+#       with:
+#         projectPath: The-Islander
+#         testMode: playmode
+#
+#     # Upload artifact
+#     - uses: actions/upload-artifact@v1
+#       with:
+#         name: Test results (play mode)
+#         path: ${{ steps.testRunner.outputs.artifactsPath }}
+#
+# testRunnerInAllModes:
+#   name: Test all modes ✨
+#   runs-on: ubuntu-latest
+#   steps:
+#     # Checkout repository (required to test local actions)
+#     - uses: actions/checkout@v2
+#       with:
+#         lfs: true
+#
+#     # Cache
+#     - uses: actions/cache@v1.1.0
+#       with:
+#          path: Library
+#         key: Library-test-project-${{ matrix.targetPlatform }}
+#         restore-keys: |
+#           Library-
+#     # Configure test runner
+#     - uses: webbertakken/unity-test-runner@v1.3
+#       id: testRunner
+#       with:
+#         ##projectPath: The-Islander
+#         testMode: all
+#
+#     # Upload artifacts
+#     - uses: actions/upload-artifact@v1
+#       with:
+#         name: Test results (all modes)
+#         path: ${{ steps.testRunner.outputs.artifactsPath }}
+#
   #
   # Complete advanced workflow
   #
