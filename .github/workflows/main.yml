@@ -28,14 +28,12 @@ jobs:
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.3
         with:
-          projectPath: The-Islander
           unityVersion: 2019.4.14f1
 
       # Build
       - name: Build project
         uses: webbertakken/unity-builder@v0.10
         with:
-          projectPath: The-Islander
           unityVersion: 2019.4.14f1
           targetPlatform: WebGL
 
@@ -214,13 +212,11 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: Test results (all modes)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
       - uses: webbertakken/unity-builder@v0.10
         with:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
-          customParameters: "-myParameter myValue -myBoolean -ThirdParameter andItsValue"
       - uses: actions/upload-artifact@v1
         with:
           name: Build
