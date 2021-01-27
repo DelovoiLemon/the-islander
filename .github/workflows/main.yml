@@ -1,4 +1,4 @@
-name: Actions 😎
+name: Build
 
 on:
   pull_request: {}
@@ -8,47 +8,6 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
-  readmeWorkflow:
-    name: Readme Workflow ✨
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: The-Islander/Library
-          key: Library-test-project-WebGL
-
-      # Test
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with:
-          unityVersion: 2019.4.14f1
-
-      # Build
-      - name: Build project
-        uses: webbertakken/unity-builder@v0.10
-        with:
-          unityVersion: 2019.4.14f1
-          targetPlatform: WebGL
-
-      # Output
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Build
-          path: build
-
-  #
-  # End of readme workflow.
-  #
-  # Below is a test of most combinations, for testing integrity.
-  #
-
   requestManualActivationFile:
     name: Request manual activation file 🔑
     runs-on: ubuntu-latest
@@ -87,94 +46,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: webbertakken/unity-activate@v1.2
       - uses: webbertakken/unity-return-license@v1
-
-# testRunnerInEditMode:
-#    name: Test in editmode 📝
-#    runs-on: ubuntu-latest
-#    steps:
-#      # Checkout repository (required to test local actions)
-#      - uses: actions/checkout@v2
-#        with:
-#          lfs: true
-
-      # Cache
-#      - uses: actions/cache@v1.1.0
-#        with:
-#          path: The-Islander/Library
-#          key: Library-test-project-${{ matrix.targetPlatform }}
-#          restore-keys: |
-#            Library-
-#      # Configure test runner
-#      - uses: webbertakken/unity-test-runner@v1.3
-#        id: testRunner
-#        with:
-#          projectPath: The-Islander
-#          testMode: editmode
-#
-#     # Upload artifact
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: Test results (edit mode)
-#         path: ${{ steps.testRunner.outputs.artifactsPath }}
-#
-# testRunnerInPlayMode:
-#    name: Test in playmode 📺
-#   runs-on: ubuntu-latest
-#   steps:
-#     # Checkout repository (required to test local actions)
-#     - uses: actions/checkout@v2
-#       with:
-#         lfs: true
-#
-#     # Cache
-#     - uses: actions/cache@v1.1.0
-#       with:
-#         path: The-Islander/Library
-#         key: Library-test-project-${{ matrix.targetPlatform }}
-#         restore-keys: |
-#           Library-
-#     # Configure test runner
-#     - uses: webbertakken/unity-test-runner@v1.3
-#       id: testRunner
-#       with:
-#         projectPath: The-Islander
-#         testMode: playmode
-#
-#     # Upload artifact
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: Test results (play mode)
-#         path: ${{ steps.testRunner.outputs.artifactsPath }}
-#
-# testRunnerInAllModes:
-#   name: Test all modes ✨
-#   runs-on: ubuntu-latest
-#   steps:
-#     # Checkout repository (required to test local actions)
-#     - uses: actions/checkout@v2
-#       with:
-#         lfs: true
-#
-#     # Cache
-#     - uses: actions/cache@v1.1.0
-#       with:
-#          path: Library
-#         key: Library-test-project-${{ matrix.targetPlatform }}
-#         restore-keys: |
-#           Library-
-#     # Configure test runner
-#     - uses: webbertakken/unity-test-runner@v1.3
-#       id: testRunner
-#       with:
-#         ##projectPath: The-Islander
-#         testMode: all
-#
-#     # Upload artifacts
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: Test results (all modes)
-#         path: ${{ steps.testRunner.outputs.artifactsPath }}
-#
+      
   #
   # Complete advanced workflow
   #
@@ -190,7 +62,7 @@ jobs:
         unityVersion:
           - 2019.4.14f1
         targetPlatform:
-          - Android # Build a macOS standalone (Intel 64-bit).
+          - Android # Build Android version.
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
           # - StandaloneLinux64 # Build a Linux 64-bit standalone.
     steps:
@@ -212,9 +84,9 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}  
       - uses: webbertakken/unity-builder@v0.10
         with:
-          projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v1
